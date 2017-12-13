@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 
 public class PreferencesManager {
 
@@ -47,6 +49,21 @@ public class PreferencesManager {
 
     public static boolean isMale(Context c) {
         return getPreferences(c).getBoolean(ISMALE, false);
+    }
+
+    public static void addUser(User user, Context c) {
+        Gson gson = new Gson();
+        String mapString = gson.toJson(user);
+        getPreferences(c).edit().putString("user", mapString).apply();
+    }
+
+    public static User getUser(Context c) {
+        return new Gson().fromJson(getPreferences(c).
+                getString("user", ""), User.class);
+    }
+
+    public static void  removeUser(Context c){
+        getPreferences(c).edit().remove("user").apply();
     }
 
 }

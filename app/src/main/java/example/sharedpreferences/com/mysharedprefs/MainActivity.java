@@ -39,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         PreferencesManager.setLastName(lastName.getText().toString(), this);
         PreferencesManager.setAge(age.getText().toString(), this);
         PreferencesManager.setIsmale(isMale.isChecked(), this);
+
+        User user = new User();
+        user.setAge(age.getText().toString());
+        user.setFirstName(firstName.getText().toString());
+        user.setLastName(lastName.getText().toString());
+        user.setMale(isMale.isChecked());
+
+        PreferencesManager.addUser(user,this);
+
+
         Toast.makeText(this, "User details Saved", Toast.LENGTH_SHORT).show();
     }
 
